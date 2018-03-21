@@ -47,4 +47,4 @@ Here's a simple usage example of both helper functions:
 </script>
 ```
 
-For a more detailed example of what you can do with XPath, check out the [XPath Selector Demo](http://tomhodgins.github.io/queryxpath/tests/xpath-selector-demo.html) test page.
+For a more detailed example of what you can do with XPath, check out the [XPath Selector Demo](http://tomhodgins.github.io/queryxpath/tests/xpath-selector-test.html) test page.
