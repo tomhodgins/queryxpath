@@ -1,6 +1,6 @@
 # queryxpath
 
-*Simple `queryXPath()` and `queryXPathAll()` functions for JavaScript*
+**Simple `queryXPath()` and `queryXPathAll()` functions for JavaScript**
 
 These functions add the ability to query the document for elements that match XPath selectors, and returns them in an array. They act as a simple layer of abstraction covering over the details of `document.evaluate()`, which is the platform native way to query XPath from JavaScript, and provide a simpler UI for developers working with XPaths in the browser.
 
