@@ -38,12 +38,10 @@ Here's a simple usage example of both helper functions:
 
 <script>
   // Selecting the <ul> as the parent of <li class=target>
-  queryXPath('//li[@class="target"]/parent::*')
-    .style.border = '4px dashed orange'
+  queryXPath('//li[@class="target"]/parent::*').style.border = '4px dashed orange'
     
   // Selecting all <li> elements
-  queryXPathAll('//li').forEach(tag => 
-    tag.style.border = '4px dashed blue')
+  queryXPathAll('//li').forEach(tag => tag.style.border = '4px dashed blue')
 </script>
 ```
 
