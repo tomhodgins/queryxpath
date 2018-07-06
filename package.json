@@ -1,0 +1,34 @@
+{
+  "name": "queryxpath",
+  "version": "1.0.0",
+  "description": "Simple queryXPath() and queryXPathAll() functions for JavaScript",
+  "main": "queryxpath.cjs.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomhodgins/queryxpath.git"
+  },
+  "keywords": [
+    "xpath",
+    "xpath-query",
+    "selector",
+    "queryxpath",
+    "queryxpathall",
+    "DOM",
+    "node",
+    "xml",
+    "html",
+    "path"
+  ],
+  "author": "Tommy Hodgins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomhodgins/queryxpath/issues"
+  },
+  "homepage": "https://github.com/tomhodgins/queryxpath#readme"
+}

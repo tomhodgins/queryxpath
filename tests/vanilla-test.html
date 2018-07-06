@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<link href=https://staticresource.com/sixty.css rel=stylesheet>
+<title>XPath Selector Testing with queryXPathAll</title>
+
+<style>
+  body {max-width: 1000px}
+  body > h1, body > h2 {margin: 2em 0 1em}
+  h2 {font-size: 18pt}
+  h2 code {font-size: 80%}
+  div, li {border: 5px dotted rgba(0,155,255,.1)}
+  div, ul, li, p {margin: .5em; padding: .5em}
+</style>
+
+<h1>XPath Selector Testing with queryXPathAll</h1>
+
+<h2>Selecting any tag: <code>//*</code></h2>
+<ul id=any>
+  <li>item
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting any tagname: <code>//li</code></h2>
+<ul id=tagname>
+  <li>item
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting attribute presence: <code>//*[@class]</code></h2>
+<ul id=attribute>
+  <li>item
+  <li class>item with <code>class</code> attribute
+  <li>item
+</ul>
+
+<h2>Selecting attribute exact value: <code>//*[@class='target']</code></h2>
+<ul id=attr-exact>
+  <li>item
+  <li class=target>item with <code>class=target</code> attribute
+  <li>item
+</ul>
+
+<h2>Selecting attribute value contains: <code>//*[contains(@class, 'target')]</code></h2>
+<ul id=attr-contains>
+  <li>item
+  <li class="demo target">item  with <code>class="demo target"</code> attribute
+  <li>item
+</ul>
+
+<h2>Selecting when text content contains: <code>//*[contains(text(),'item')]</code></h2>
+<ul id=text-contains>
+  <li>it
+  <li>item
+  <li>items
+  <li>excitement
+</ul>
+
+<h2>Selecting by partial tagname: <code>//*[starts-with(name(), 'custom-')]</code></h2>
+<ul id=partial-tagname>
+  <li>item with <custom-1>custom-1</custom-1>
+  <li>item with <custom-2>custom-2</custom-2>
+</ul>
+
+<h2>Selecting by partial attribute name: <code>//*[@*[starts-with(name(), 'data-custom-')]]</code></h2>
+<ul id=partial-attr>
+  <li>item
+  <li data-custom-1>item with <code>data-custom-1</code> attribute
+  <li data-custom-2>item with <code>data-custom-2</code> attribute
+</ul>
+
+<h2>Selecting parent element: <code>//parent::*</code></h2>
+<ul id=parent>
+  <li>item
+  <li class>item with <code>class</code> attribute
+  <li>item
+</ul>
+
+<h2>Selecting preceding siblings: <code>//preceding-sibling::*</code></h2>
+<ul id=preceding-siblings>
+  <li>item
+  <li>item
+  <li class>item with <code>class</code>
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting individual preceding siblings: <code>//preceding-sibling::*[1]</code></h2>
+<ul id=preceding-sibling>
+  <li>item
+  <li>item
+  <li class>item with <code>class</code> attribute
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting following siblings: <code>//following-sibling::*</code></h2>
+<ul id=following-siblings>
+  <li>item
+  <li>item
+  <li class>item with <code>class</code> attribute
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting individual following siblings: <code>//following-sibling::*[1]</code></h2>
+<ul id=following-sibling>
+  <li>item
+  <li>item
+  <li class>item with <code>class</code> attribute
+  <li>item</li>
+  <li>item</li>
+</ul>
+
+<h2>Selecting by number of children: <code>//*[*[3]]</code></h2>
+<div id=children>
+<ul>
+  <li>item
+</ul>
+<ul>
+  <li>item
+  <li>item
+  <li>item
+</ul>
+<ul>
+  <li>item
+  <li>item
+  <li>item
+  <li>item
+  <li>item
+</ul>
+</div>
+
+<h2>Selecting comparing attribute value as number: <code>//*[@data-price >= 5]</code></h2>
+<ul id=attr-number>
+  <li data-price=1>item with <code>data-price=1</code> attribute
+  <li data-price=3>item with <code>data-price=3</code> attribute
+  <li data-price=5>item with <code>data-price=5</code> attribute
+  <li data-price=7>item with <code>data-price=7</code> attribute
+  <li data-price=9>item with <code>data-price=9</code> attribute
+</ul>
+
+<h2>Selecting heading 1-6 tags: <code>//*[substring-after(name(), "h") > 0]</code></h2>
+<ul id=heading>
+  <li><h1>Heading 1</h1>
+  <li><h2>Heading 2</h2>
+  <li><h3>Heading 3</h3>
+  <li><h4>Heading 4</h4>
+  <li><h5>Heading 5</h5>
+  <li><h6>Heading 6</h6>
+  <li><header>Header</header>
+</ul>
+
+<h2>Selecting by an element it contains (like :has()): <code>//li[strong]</code></h2>
+<ul id=has>
+  <li>item and a <strong>strong</strong>
+  <li>item
+  <li>item
+</ul>
+
+<h2>Selecting the last child: <code>//*[not(following-sibling::*[1])]</code></h2>
+<div id=last-child>
+ <p>We should see ONLY the following elements selected:</p>
+  <ul>
+    <li>The P inside DIV
+    <li>The SPAN inside P
+    <li>The UL inside LI
+    <li>The last 'UL LI'
+    <li>The last LI
+    <li>This LI right here
+  </ul>
+  <div>
+    div
+    <p>
+      p
+      <span>span</span>
+    </p>
+  </div>
+  <ul>
+    <li>li
+    <li>li
+      <ul>
+        <li>ul li
+        <li>ul li
+        <li>ul li
+      </ul>
+    <li>li
+  </ul>
+</div>
+
+<script type=module>
+  import {queryXPathAll} from '../queryxpath.es.js'
+
+  // Selecting any tag
+  queryXPathAll(`//*[@id='any']//*`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting any tagname
+  queryXPathAll(`//*[@id='tagname']//li`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting attribute presence
+  queryXPathAll(`//*[@id='attribute']//*[@class]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting attribute exact value
+  queryXPathAll(`//*[@id='attr-exact']//*[@class='target']`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting attribute value contains
+  queryXPathAll(`//*[@id='attr-contains']//*[contains(@class, 'target')]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting when text content contains
+  queryXPathAll(`//*[@id='text-contains']//*[contains(text(), 'item')]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting by partial tagname
+  queryXPathAll(`//*[@id='partial-tagname']//*[starts-with(name(), 'custom-')]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting by partial attribute name
+  queryXPathAll(`//*[@id='partial-attr']//*[@*[starts-with(name(), 'data-custom-')]]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting parent element
+  queryXPathAll(`//*[@id='parent']//*[@class]/parent::*`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting preceding siblings
+  queryXPathAll(`//*[@id='preceding-siblings']//*[@class]//preceding-sibling::*`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting individual preceding siblings
+  queryXPathAll(`//*[@id='preceding-sibling']//*[@class]//preceding-sibling::*[1]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting following siblings
+  queryXPathAll(`//*[@id='following-siblings']//*[@class]//following-sibling::*`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting individual following siblings
+  queryXPathAll(`//*[@id='following-sibling']//*[@class]//following-sibling::*[1]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting by number of children
+  queryXPathAll(`//*[@id='children']//*[*[3]]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting comparing attribute value as number
+  queryXPathAll(`//*[@id='attr-number']//*[@data-price >= 5]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting heading 1-6 tags
+  queryXPathAll(`//*[@id='heading']//*[substring-after(name(), "h") > 0]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting by an element it contains (like :has())
+  queryXPathAll(`//*[@id='has']//li[strong]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+
+  // Selecting the last child
+  queryXPathAll(`//*[@id='last-child']//*[not(following-sibling::*[1])]`)
+    .forEach(tag => tag.style.border = '5px dashed lime')
+</script>

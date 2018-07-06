@@ -6,22 +6,30 @@ These functions add the ability to query the document for elements that match XP
 
 ## Usage
 
+This plugin is provided in the following formats and files:
+
+- `queryxpath.cjs.js` a Node-formatted CommonJS module
+- `queryxpath.es.js` a vanilla ES module
+- `queryxpath.browser.js` a script containing named functions
+
 The simplest way to use these functions are to load the JavaScript file on a page where you want to use it:
 
 ```html
-<script src=https://tomhodgins.github.io/queryxpath/queryxpath.js></script>
+<script src=https://tomhodgins.github.io/queryxpath/queryxpath.browser.js></script>
 ```
 
 Then you should be able to make use of `queryXPath()` and `queryXPathAll()` right away. The `queryXPath()` function returns only one result, the first result from `queryXPathAll()`.
 
-If for some reason you really want to mimic `document.querySelector()` and `document.querySelectorAll()` you can also add these functions to the `Document` prototype with the following lines:
+### Document prototype
+
+If you want to mimic `document.querySelector()` and `document.querySelectorAll()` you can also mutilate the `Document` prototype to include these functions on `document` with the following lines:
 
 ```js
 Document.prototype.queryXPath = queryXPath
 Document.prototype.queryXPathAll = queryXPathAll
 ```
 
-However, this could conflict with any future `queryXPath` or `queryXPathAll` implementations that might show up any time in the future.
+However, this could conflict with any potential future use of `queryXPath` or `queryXPathAll` natively that could show up at any time in the future.
 
 ## Example
 
@@ -34,7 +42,7 @@ Here's a simple usage example of both helper functions:
   <li>item
 </ul>
 
-<script src=https://tomhodgins.github.io/queryxpath/queryxpath.js></script>
+<script src=https://tomhodgins.github.io/queryxpath/queryxpath.browser.js></script>
 
 <script>
   // Selecting the <ul> as the parent of <li class=target>
@@ -45,4 +53,4 @@ Here's a simple usage example of both helper functions:
 </script>
 ```
 
-For a more detailed example of what you can do with XPath, check out the [XPath Selector Demo](http://tomhodgins.github.io/queryxpath/tests/xpath-selector-test.html) test page.
+For a more detailed example of what you can do with XPath, check out the [XPath Selector Demo](http://tomhodgins.github.io/queryxpath/tests/browser-test.html) test page.
