@@ -1,26 +1,23 @@
-export const queryXPath = path => document.evaluate(
-  path,
+export const queryXPath = (string = '//*') => document.evaluate(
+  string,
   document,
   null,
-  XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-  null
-).snapshotItem(0)
+  XPathResult.FIRST_ORDERED_NODE_TYPE
+).singleNodeValue
 
-export const queryXPathAll = path => {
-
-  const nodeArray = []
+export const queryXPathAll = (string = '//*') => {
+  let node
+  const nodes = []
   const xpath = document.evaluate(
-    path,
+    string,
     document,
     null,
-    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-    null
+    XPathResult.ORDERED_NODE_ITERATOR_TYPE
   )
 
-  for (let i=0; i<xpath.snapshotLength; i++) {
-    nodeArray.push(xpath.snapshotItem(i))
+  while (node = xpath.iterateNext()) {
+    nodes.push(node)
   }
 
-  return nodeArray
-
+  return nodes
 }
